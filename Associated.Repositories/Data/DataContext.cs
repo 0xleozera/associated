@@ -12,7 +12,7 @@ namespace Associated.Repositories.Data
 
     public DbSet<Associate> Associated { get; set; }
     public DbSet<Dependent> Dependents { get; set; }
-    public DbSet<MaritalStatus> MaterialStatus { get; set; }
+    public DbSet<MaritalStatus> MaritalStatus { get; set; }
     public DbSet<Kinship> Kinships { get; set; }
     public DbSet<User> Users { get; set; }
   }

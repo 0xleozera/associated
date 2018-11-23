@@ -40,7 +40,7 @@ namespace Associated.API
           ValidateIssuerSigningKey = true,
           ValidAudience = "Associated",
           ValidIssuer = "Associated",
-          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Associated"))
+          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("AssociatedProjectLPCCLASS"))
         });
 
       services.AddMvc();

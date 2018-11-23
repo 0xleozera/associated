@@ -62,9 +62,9 @@ namespace Associated.API.Controllers
     [HttpPost("authenticate")]
     public IActionResult Authentication([FromBody] User user)
     {
-      var usuario = this.repository.AuthUser(user);
+      var getUserAuth = this.repository.AuthUser(user);
 
-      if(usuario == null) {
+      if(getUserAuth == null) {
         return BadRequest(new {
           message = "Login e/ou senha incorreto(s)."
         });

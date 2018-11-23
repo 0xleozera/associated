@@ -22,12 +22,14 @@ namespace Associated.API.Controllers
       this.repository = repository;
     }
 
+    [Authorize]
     [HttpGet]
     public IEnumerable<User> Get()
     {
       return this.repository.GetAll();
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public User Get(int id)
     {
@@ -41,6 +43,7 @@ namespace Associated.API.Controllers
       return Ok(user);
     }
 
+    [Authorize]
     [HttpPut]
     public IActionResult Put([FromBody]User user)
     {
@@ -48,6 +51,7 @@ namespace Associated.API.Controllers
       return Ok(user);
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {

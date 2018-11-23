@@ -29,12 +29,14 @@ namespace Associated.API.Controllers
       return this.repository.GetAll();
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public Kinship Get(int id)
     {
       return this.repository.GetById(id);
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Post([FromBody]Kinship kinship)
     {
@@ -42,6 +44,7 @@ namespace Associated.API.Controllers
       return Ok(kinship);
     }
 
+    [Authorize]
     [HttpPut]
     public IActionResult Put([FromBody]Kinship kinship)
     {
@@ -49,6 +52,7 @@ namespace Associated.API.Controllers
       return Ok(kinship);
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {

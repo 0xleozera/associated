@@ -29,12 +29,14 @@ namespace Associated.API.Controllers
       return this.repository.GetAll();
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public MaritalStatus Get(int id)
     {
       return this.repository.GetById(id);
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Post([FromBody]MaritalStatus maritalStatus)
     {
@@ -42,6 +44,7 @@ namespace Associated.API.Controllers
       return Ok(maritalStatus);
     }
 
+    [Authorize]
     [HttpPut]
     public IActionResult Put([FromBody]MaritalStatus maritalStatus)
     {
@@ -49,6 +52,7 @@ namespace Associated.API.Controllers
       return Ok(maritalStatus);
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {

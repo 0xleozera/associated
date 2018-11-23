@@ -29,12 +29,14 @@ namespace Associated.API.Controllers
       return this.repository.GetAll();
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public Associate Get(int id)
     {
       return this.repository.GetById(id);
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Post([FromBody]Associate associate)
     {
@@ -42,6 +44,7 @@ namespace Associated.API.Controllers
       return Ok(associate);
     }
 
+    [Authorize]
     [HttpPut]
     public IActionResult Put([FromBody]Associate associate)
     {
@@ -49,6 +52,7 @@ namespace Associated.API.Controllers
       return Ok(associate);
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {

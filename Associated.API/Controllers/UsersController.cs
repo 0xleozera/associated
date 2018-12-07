@@ -25,9 +25,9 @@ namespace Associated.API.Controllers
 
     [Authorize]
     [HttpGet]
-    public IEnumerable<UserDTO> Get()
+    public async Task<IEnumerable<UserDTO>> Get()
     {
-      var users = this.repository.GetAll();
+      var users = await this.repository.GetAll();
       var usersDTO = new List<UserDTO>();
 
       users.ForEach(user => {
@@ -39,31 +39,31 @@ namespace Associated.API.Controllers
 
     [Authorize]
     [HttpGet("{id}")]
-    public User Get(int id)
+    public async Task<User> Get(int id)
     {
-      return this.repository.GetById(id);
+      return await this.repository.GetById(id);
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody]User user)
+    public async Task<IActionResult> Post([FromBody]User user)
     {
-      this.repository.Create(user);
+      await this.repository.Create(user);
       return Ok(user);
     }
 
     [Authorize]
     [HttpPut]
-    public IActionResult Put([FromBody]User user)
+    public async Task<IActionResult> Put([FromBody]User user)
     {
-      this.repository.Update(user);
+      await this.repository.Update(user);
       return Ok(user);
     }
 
     [Authorize]
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-      this.repository.Delete(id);
+      await this.repository.Delete(id);
 
       return Ok(new {
         message = "Deletado com sucesso.",
@@ -72,9 +72,9 @@ namespace Associated.API.Controllers
     }
 
     [HttpPost("authenticate")]
-    public IActionResult Authentication([FromBody] User user)
+    public async Task<IActionResult> Authentication([FromBody] User user)
     {
-      var getUserAuth = this.repository.AuthUser(user);
+      var getUserAuth = await this.repository.AuthUser(user);
 
       if(getUserAuth == null) {
         return BadRequest(new {

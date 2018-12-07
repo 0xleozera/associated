@@ -24,39 +24,39 @@ namespace Associated.API.Controllers
 
     [Authorize]
     [HttpGet]
-    public IEnumerable<Kinship> Get()
+    public async Task<IEnumerable<Kinship>> Get()
     {
-      return this.repository.GetAll();
+      return await this.repository.GetAll();
     }
 
     [Authorize]
     [HttpGet("{id}")]
-    public Kinship Get(int id)
+    public async Task<Kinship> Get(int id)
     {
-      return this.repository.GetById(id);
+      return await this.repository.GetById(id);
     }
 
     [Authorize]
     [HttpPost]
-    public IActionResult Post([FromBody]Kinship kinship)
+    public async Task<IActionResult> Post([FromBody]Kinship kinship)
     {
-      this.repository.Create(kinship);
+      await this.repository.Create(kinship);
       return Ok(kinship);
     }
 
     [Authorize]
     [HttpPut]
-    public IActionResult Put([FromBody]Kinship kinship)
+    public async Task<IActionResult> Put([FromBody]Kinship kinship)
     {
-      this.repository.Update(kinship);
+      await this.repository.Update(kinship);
       return Ok(kinship);
     }
 
     [Authorize]
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-      this.repository.Delete(id);
+      await this.repository.Delete(id);
 
       return Ok(new {
         message = "Deletado com sucesso.",

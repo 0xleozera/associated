@@ -25,9 +25,9 @@ namespace Associated.API.Controllers
 
     [Authorize]
     [HttpGet]
-    public IEnumerable<AssociateDTO> Get()
+    public async Task<IEnumerable<AssociateDTO>> Get()
     {
-      var associated = this.repository.GetAll();
+      var associated = await this.repository.GetAll();
       var associatedDTO = new List<AssociateDTO>();
 
       associated.ForEach(associate => {
@@ -39,16 +39,16 @@ namespace Associated.API.Controllers
 
     [Authorize]
     [HttpGet("{id}")]
-    public Associate Get(int id)
+    public async Task<Associate> Get(int id)
     {
-      return this.repository.GetById(id);
+      return await this.repository.GetById(id);
     }
 
     [Authorize]
     [HttpPost]
-    public IActionResult Post([FromBody]Associate associate)
+    public async Task<IActionResult> Post([FromBody]Associate associate)
     {
-      this.repository.Create(associate);
+      await this.repository.Create(associate);
       return Ok(associate);
     }
 
@@ -62,9 +62,9 @@ namespace Associated.API.Controllers
 
     [Authorize]
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-      this.repository.Delete(id);
+      await this.repository.Delete(id);
 
       return Ok(new {
         message = "Deletado com sucesso.",

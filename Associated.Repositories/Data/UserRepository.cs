@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Associated.Domain;
 using Associated.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,37 +16,37 @@ namespace Associated.Repositories.Data
       this.dataContext = dataContext;
     }
 
-    public User AuthUser(User user)
+    public async Task<User> AuthUser(User user)
     {
-      return dataContext.Users.SingleOrDefault(u => u.Name == user.Name && u.Password == user.Password);
+      return await dataContext.Users.SingleOrDefaultAsync(u => u.Name == user.Name && u.Password == user.Password);
     }
 
-    public void Create(User user)
+    public async Task Create(User user)
     {
       dataContext.Add(user);
-      dataContext.SaveChanges();
+      await dataContext.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
       dataContext.Remove(GetById(id));
-      dataContext.SaveChanges();
+      await dataContext.SaveChangesAsync();
     }
 
-    public List<User> GetAll()
+    public async Task<List<User>> GetAll()
     {
-      return dataContext.Users.ToList();
+      return await dataContext.Users.ToListAsync();
     }
 
-    public User GetById(int id)
+    public async Task<User> GetById(int id)
     {
-      return dataContext.Users.SingleOrDefault(x=> x.Id == id);
+      return await dataContext.Users.SingleOrDefaultAsync(x=> x.Id == id);
     }
 
-    public void Update(User user)
+    public async Task Update(User user)
     {
       dataContext.Entry(user).State = EntityState.Modified;
-      dataContext.SaveChanges();
+      await dataContext.SaveChangesAsync();
     }
   }
 }

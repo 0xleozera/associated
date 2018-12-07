@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Associated.Domain;
 using Associated.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,32 +16,32 @@ namespace Associated.Repositories.Data
       this.dataContext = dataContext;
     }
 
-    public void Create(Dependent dependent)
+    public async Task Create(Dependent dependent)
     {
       dataContext.Add(dependent);
-      dataContext.SaveChanges();
+      await dataContext.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
       dataContext.Remove(GetById(id));
-      dataContext.SaveChanges();
+      await dataContext.SaveChangesAsync();
     }
 
-    public List<Dependent> GetAll()
+    public async Task<List<Dependent>> GetAll()
     {
-      return dataContext.Dependents.ToList();
+      return await dataContext.Dependents.ToListAsync();
     }
 
-    public Dependent GetById(int id)
+    public async Task<Dependent> GetById(int id)
     {
-      return dataContext.Dependents.SingleOrDefault(x=> x.Id == id);
+      return await dataContext.Dependents.SingleOrDefaultAsync(x=> x.Id == id);
     }
 
-    public void Update(Dependent dependent)
+    public async Task Update(Dependent dependent)
     {
       dataContext.Entry(dependent).State = EntityState.Modified;
-      dataContext.SaveChanges();
+      await dataContext.SaveChangesAsync();
     }
   }
 }

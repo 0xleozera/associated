@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Associated.Domain;
 using Associated.Repositories;
 using Associated.Repositories.Interfaces;
+using Associated.API.DTOs;
 
 namespace Associated.API.Controllers
 {
@@ -24,9 +25,16 @@ namespace Associated.API.Controllers
 
     [Authorize]
     [HttpGet]
-    public IEnumerable<Associate> Get()
+    public IEnumerable<AssociateDTO> Get()
     {
-      return this.repository.GetAll();
+      var associated = this.repository.GetAll();
+      var associatedDTO = new List<AssociateDTO>();
+
+      associated.ForEach(associate => {
+        associatedDTO.Add(new AssociateDTO{ Id = associate.Id, Name = associate.Name, Cpf = associate.Cpf, Email = associate.Email });
+      });
+
+      return associatedDTO;
     }
 
     [Authorize]
